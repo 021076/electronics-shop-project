@@ -1,11 +1,9 @@
 import csv
-import os
 
 
 class Item:
     """ Класс для представления товара в магазине."""
 
-    # path_project: os.path = os.getenv("electronics-shop-project")
     pay_rate = 1.0
     all = []
 
@@ -19,6 +17,12 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.all.append(self)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return str(self.name)
 
     def calculate_total_price(self) -> float:
         """Рассчитывает общую стоимость конкретного товара в магазине.
@@ -53,9 +57,6 @@ class Item:
                 quantity = cls.string_to_number(quantity)
                 cls(name, price, quantity)
 
-
     @staticmethod
     def string_to_number(from_str):
         return int(float(from_str))
-
-
