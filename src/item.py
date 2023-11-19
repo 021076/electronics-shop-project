@@ -60,3 +60,7 @@ class Item:
     @staticmethod
     def string_to_number(from_str):
         return int(float(from_str))
+
+    def __add__(self, other):
+        """Метод для операции сложения"""
+        return self.quantity + other.quantity
