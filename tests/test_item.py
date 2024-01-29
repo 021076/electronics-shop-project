@@ -13,8 +13,16 @@ def test_calculate_total_price(some_item):
 
 
 def test_apply_discount(some_item):
-    Item.pay_rate = 0.8
-    assert some_item.apply_discount() == 4000.0
+    some_item.pay_rate = 0.5
+    some_item.apply_discount()
+    assert some_item.price == 2500.0
+
+
+def test_name(some_item):
+    some_item.name = 'Смартфон'
+    assert some_item.name == 'Смартфон'
+    with pytest.raises(Exception):
+        some_item.name = 'СуперСмартфон'
 
 
 def test_instantiate_from_csv():
