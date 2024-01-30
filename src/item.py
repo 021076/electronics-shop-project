@@ -1,11 +1,9 @@
 import csv
-# import os
 
 
 class Item:
     """ Класс для представления товара в магазине."""
 
-    # path_project: os.path = os.getenv("electronics-shop-project")
     pay_rate = 1.0
     all = []
 
