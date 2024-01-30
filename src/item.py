@@ -31,22 +31,27 @@ class Item:
         total_price = self.price * self.quantity
         return total_price
 
-    def apply_discount(self) -> float:
+    def apply_discount(self) -> None:
         """Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * self.pay_rate
-        return self.price
+        # return self.price
 
     @property
     def name(self):
+        """Устанавливает приватный режим для атрибута name"""
         return self.__name
 
     @name.setter
     def name(self, newname):
-        self.__name = newname[:10]
+        """ Доступ к приватному атрибуту name"""
+        self.__name = newname
+        if len(newname) > 10:
+            raise Exception('Длина наименования товара превышает 10 символов.')
 
     @classmethod
     def instantiate_from_csv(cls, csv_file):
+        """ Метод уровня класса чтение csv-файлов"""
         cls.all.clear()
         with open(csv_file, encoding='windows-1251', ) as f:
             reader = csv.DictReader(f)
@@ -59,4 +64,5 @@ class Item:
 
     @staticmethod
     def string_to_number(from_str):
+        """ Статический метод перевод строки в целое число"""
         return int(float(from_str))
