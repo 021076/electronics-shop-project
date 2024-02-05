@@ -16,3 +16,4 @@ if __name__ == '__main__':
     print(item2.price)  # 20000
 
     print(Item.all)  # [<__main__.Item object at 0x000001EC6250C690>, <__main__.Item object at 0x000001EC6250C6D0>]
+    # если доступна функция __repr__, стр. 21 в item.ty (из homework-3), то результат [Item('Смартфон', 8000.0, 20), Item('Ноутбук', 20000, 5)]
