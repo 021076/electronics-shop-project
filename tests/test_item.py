@@ -60,3 +60,5 @@ def test_isinstance(some_item, some_phone):
 def test__add__(some_item, some_phone):
     assert some_item.quantity + some_item.quantity == 100
     assert some_item.quantity + some_phone.quantity == 54
+    with pytest.raises(ValueError):
+        some_item + 1

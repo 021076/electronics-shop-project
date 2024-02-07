@@ -34,4 +34,5 @@ def test_number_of_sim(some_phone):
 def test__add___(some_phone, some_item):
     assert some_phone.quantity + some_phone.quantity == 8
     assert some_phone.quantity + some_item.quantity == 54
-    # with pytest.raises(ValueError):
+    with pytest.raises(ValueError):
+        some_phone + 1
