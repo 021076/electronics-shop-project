@@ -1,5 +1,17 @@
 """Здесь надо написать тесты с использованием pytest для модуля Phone."""
+import pytest
+
 from src.phone import Phone
+from src.item import Item
+
+
+def test_issubclass():
+    assert issubclass(Phone, Item) == True
+
+
+def test_isinstance(some_item, some_phone):
+    assert isinstance(some_phone, Phone) == True
+    assert isinstance(some_item, Phone) == False
 
 
 def test__repr__(some_phone):
@@ -10,10 +22,14 @@ def test__str__(some_phone):
     assert some_phone.__str__() == 'Смартфон'
 
 
-def test__add__(some_phone, some_item):
+def test_number_of_sim(some_phone):
+    some_phone.number_of_sim = 4
+    assert some_phone.number_of_sim == 4
+    with pytest.raises(ValueError):
+        some_phone.number_of_sim = 0
+
+
+def test__add___(some_phone, some_item):
+    assert some_phone.quantity + some_phone.quantity == 8
     assert some_phone.quantity + some_item.quantity == 54
-    phone1 = Phone('Samsung A8+', 15000, 11, 1)
-    phone2 = Phone('TECHNO CAMON 19 Pro', 25000, 1, 2)
-    assert phone1.quantity + phone2.quantity == 12
-
-
+    # with pytest.raises(ValueError):

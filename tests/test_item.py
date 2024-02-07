@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-
+import pytest
 from src.item import Item
+from src.phone import Phone
 
 
 def test_calculate_total_price(some_item):
@@ -46,7 +47,16 @@ def test__repr__(some_item):
 def test__str__(some_item):
     assert some_item.__str__() == 'Товар'
 
-def test__add__():
-    item1=Item('Товар1', 15000, 17)
-    item2 = Item('Товар2', 25000, 21)
-    assert item1.quantity + item2.quantity == 38
+
+def test_issubclass():
+    assert issubclass(Phone, Item) == True
+
+
+def test_isinstance(some_item, some_phone):
+    assert isinstance(some_item, Item) == True
+    assert isinstance(some_phone, Item) == True
+
+
+def test__add__(some_item, some_phone):
+    assert some_item.quantity + some_item.quantity == 100
+    assert some_item.quantity + some_phone.quantity == 54

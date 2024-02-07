@@ -1,14 +1,6 @@
 import csv
 
 
-class FileNotFoundError(Exception):
-    def __init__(self, message):
-        self.message = message
-
-    def __str__(self):
-        return f"Ошибка: {self.message}"
-
-
 class Item:
     """ Класс для представления товара в магазине."""
 
@@ -25,7 +17,6 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.all.append(self)
-        super().__init__()
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
@@ -77,16 +68,7 @@ class Item:
         return int(float(from_str))
 
     def __add__(self, other):
-        """Метод для операции сложения"""
+        """Метод для операции сложения только между классами Phone и Item"""
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
         return self.quantity + other.quantity
-
-
-class MixinLanguage:
-    def __init__(self):
-        self.language = "EN"
-
-    def change_lang(self):
-        if self.language == "EN":
-            self.language = "RU"
-        else:
-            self.language = "EN"
