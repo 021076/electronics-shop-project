@@ -20,7 +20,8 @@ class Phone(Item):
     @number_of_sim.setter
     def number_of_sim(self, new_number_of_sim: int):
         self._number_of_sim = new_number_of_sim
-        if new_number_of_sim == 0:
+        # if new_number_of_sim == 0:
+        if new_number_of_sim <= 0 or new_number_of_sim % 1 != 0:
             raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
 
     def __repr__(self):
