@@ -3,7 +3,6 @@ import csv
 
 class Item:
     """ Класс для представления товара в магазине."""
-
     pay_rate = 1.0
     all = []
 
@@ -13,6 +12,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
+        super().__init__()
         self.__name = name
         self.price = price
         self.quantity = quantity
@@ -32,8 +32,7 @@ class Item:
         return total_price
 
     def apply_discount(self) -> None:
-        """Применяет установленную скидку для конкретного товара.
-        """
+        """Применяет установленную скидку для конкретного товара."""
         self.price = self.price * self.pay_rate
         # return self.price
 
