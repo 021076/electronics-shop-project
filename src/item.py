@@ -1,6 +1,23 @@
 import csv
 
 
+class ItemError(Exception):
+    """Общий класс исключения для кастомных исключений"""
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Неизвестная ошибка'
+
+    def __str__(self):
+        return self.message
+
+
+class InstantiateCSVError(ItemError):
+    """Класс кастомного исключения при повреждении файла"""
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else '_Файл item.csv поврежден_'
+
+
 class Item:
     """ Класс для представления товара в магазине."""
     pay_rate = 1.0
@@ -48,18 +65,38 @@ class Item:
         if len(newname) > 10:
             raise Exception('Длина наименования товара превышает 10 символов.')
 
+    # @classmethod
+    # def instantiate_from_csv(cls, csv_file):
+    #     """ Метод уровня класса чтение csv-файлов"""
+    #     cls.all.clear()
+    #     with open(csv_file, encoding='windows-1251', ) as f:
+    #         reader = csv.DictReader(f)
+    #         for row_csv in reader:
+    #             item_list = list(row_csv.values())
+    #             name, price, quantity = item_list
+    #             price = float(price)
+    #             quantity = cls.string_to_number(quantity)
+    #             cls(name, price, quantity)
     @classmethod
     def instantiate_from_csv(cls, csv_file):
         """ Метод уровня класса чтение csv-файлов"""
         cls.all.clear()
-        with open(csv_file, encoding='windows-1251', ) as f:
-            reader = csv.DictReader(f)
-            for row_csv in reader:
-                item_list = list(row_csv.values())
-                name, price, quantity = item_list
-                price = float(price)
-                quantity = cls.string_to_number(quantity)
-                cls(name, price, quantity)
+        try:
+            open(csv_file)
+        except FileNotFoundError:
+            print("FileNotFoundError: Отсутствует файл item.csv")
+        else:
+            with open(csv_file, encoding='windows-1251', ) as f:
+                reader = csv.DictReader(f)
+                if len(reader.fieldnames) < 3:
+                    raise InstantiateCSVError
+                for row_csv in reader:
+                    print(row_csv)
+                    item_list = list(row_csv.values())
+                    name, price, quantity = item_list
+                    price = float(price)
+                    quantity = cls.string_to_number(quantity)
+                    cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(from_str):
