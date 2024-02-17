@@ -84,7 +84,7 @@ class Item:
         try:
             open(csv_file)
         except FileNotFoundError:
-            print("FileNotFoundError: Отсутствует файл item.csv")
+            raise FileNotFoundError("_Отсутствует файл item.csv_")
         else:
             with open(csv_file, encoding='windows-1251', ) as f:
                 reader = csv.DictReader(f)
